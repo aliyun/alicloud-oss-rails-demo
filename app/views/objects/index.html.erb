@@ -1,0 +1,34 @@
+<h1>Objects in <%= @bucket_name %></h1>
+<p> <%= link_to 'Upload file', new_object_path(@bucket_name, @prefix) %></p>
+<table class="table table-striped">
+  <tr>
+    <th>Key</th>
+    <th>Type</th>
+    <th>Size</th>
+    <th>LastModified</th>
+  </tr>
+
+  <tr>
+    <td><%= link_to '../', with_prefix(upper_dir(@prefix)) %></td>
+    <td>Directory</td>
+    <td>N/A</td>
+    <td>N/A</td>
+  </tr>
+
+  <% @objects.each do |object| %>
+  <tr>
+    <% if object.is_a?(Aliyun::OSS::Object) %>
+    <td><%= link_to remove_prefix(object.key, @prefix),
+            @bucket.object_url(object.key) %></td>
+    <td><%= object.type %></td>
+    <td><%= number_to_human_size(object.size) %></td>
+    <td><%= object.last_modified.localtime.to_s %></td>
+    <% else  %>
+    <td><%= link_to remove_prefix(object, @prefix), with_prefix(object) %></td>
+    <td>Directory</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <% end  %>
+  </tr>
+  <% end %>
+</table>

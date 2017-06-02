@@ -1,0 +1,16 @@
+<h1>Buckets</h1>
+<table class="table table-striped">
+  <tr>
+    <th>Name</th>
+    <th>Location</th>
+    <th>CreationTime</th>
+  </tr>
+
+  <% @buckets.each do |bucket| %>
+  <tr>
+    <td><%= link_to bucket.name, bucket_objects_path(bucket.name) %></td>
+    <td><%= bucket.location %></td>
+    <td><%= bucket.creation_time.localtime.to_s %></td>
+  </tr>
+  <% end %>
+</table>

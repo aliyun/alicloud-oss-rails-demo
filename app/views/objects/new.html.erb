@@ -1,0 +1,27 @@
+<h2>Upload object</h2>
+
+<%= upload_form(@bucket, @options) do %>
+  <table class="table table-striped">
+    <tr>
+      <td><label>Bucket:</label></td>
+      <td><%= @bucket.name  %></td>
+    </tr>
+    <tr>
+      <td><label>Prefix:</label></td>
+      <td><%= @prefix  %></td>
+    </tr>
+
+    <tr>
+      <td><label>Select file:</label></td>
+      <td><input type="file" name="file" style="display:inline" /></td>
+    </tr>
+
+    <tr>
+      <td colspan="2">
+        <input type="submit" class="btn btn-default" value="Upload" />
+        <span>&nbsp;&nbsp</span>
+        <%= link_to 'Back', objects_path(@bucket_name, @prefix) %>
+      </td>
+    </tr>
+  </table>
+<% end %>
